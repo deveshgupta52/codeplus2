@@ -41,7 +41,7 @@ const app = express();
 
 const allowedOrigins = [
     'http://localhost:5173',                
-    'https://codeplus-jade.vercel.app'      
+    'https://code-t3sb.vercel.app/' 
 ];
 
 app.use(cors({
