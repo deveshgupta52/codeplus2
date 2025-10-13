@@ -6,8 +6,8 @@ export const darkTheme = {
     "--foreground": "210 40% 98%",
     "--card": "222.2 84% 4.9%",
     "--card-foreground": "210 40% 98%",
-    "--primary": "217.2 91.2% 59.8%",
-    "--primary-foreground": "222.2 47.4% 11.2%",
+    "--primary": "262.1 83.3% 57.8%",
+    "--primary-foreground": "210 40% 98%",
     "--secondary": "217.2 32.6% 17.5%",
     "--secondary-foreground": "210 40% 98%",
     "--muted": "217.2 32.6% 17.5%",
@@ -18,9 +18,8 @@ export const darkTheme = {
     "--destructive-foreground": "210 40% 98%",
     "--border": "217.2 32.6% 17.5%",
     "--input": "217.2 32.6% 17.5%",
-    "--ring": "212.7 26.8% 83.9%",
+    "--ring": "262.1 83.3% 57.8%",
   },
-  //Monaco Editor specific theme configuration
   editorTheme: {
     base: 'vs-dark',
     inherit: true,

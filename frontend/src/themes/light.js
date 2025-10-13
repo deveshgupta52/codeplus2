@@ -6,7 +6,7 @@ export const lightTheme = {
     "--foreground": "222.2 84% 4.9%",
     "--card": "0 0% 100%",
     "--card-foreground": "222.2 84% 4.9%",
-    "--primary": "221.2 83.2% 53.3%",
+    "--primary": "263.4 95.2% 58.6%",
     "--primary-foreground": "210 40% 98%",
     "--secondary": "210 40% 96.1%",
     "--secondary-foreground": "222.2 47.4% 11.2%",
@@ -18,9 +18,8 @@ export const lightTheme = {
     "--destructive-foreground": "210 40% 98%",
     "--border": "214.3 31.8% 91.4%",
     "--input": "214.3 31.8% 91.4%",
-    "--ring": "222.2 84% 4.9%",
+    "--ring": "263.4 95.2% 58.6%",
   },
-  //Monaco Editor specific theme configuration
   editorTheme: {
     base: 'vs',
     inherit: true,

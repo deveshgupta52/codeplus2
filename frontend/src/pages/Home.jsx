@@ -6,7 +6,8 @@ const Home = () => {
     const { user } = useAuth();
     return (
         <div className="container mx-auto px-4 py-16 text-center">
-            <h1 className="text-4xl md:text-5xl font-extrabold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-primary via-blue-500 to-teal-400">
+            {/* --- MODIFIED: Removed old gradient classes, added text-primary --- */}
+            <h1 className="text-4xl md:text-5xl font-extrabold mb-4 text-primary text-glow">
                 Welcome to Code++
             </h1>
             <p className="text-lg text-muted-foreground">
@@ -29,4 +30,5 @@ const Home = () => {
         </div>
     );
 };
+
 export default Home;

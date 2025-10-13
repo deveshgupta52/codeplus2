@@ -14,6 +14,7 @@ const Navbar = () => {
         navigate('/login');
     };
 
+
     const navLinkClasses = "font-medium text-muted-foreground hover:text-foreground transition-colors";
     const activeNavLinkClasses = "text-primary font-semibold";
 
@@ -22,7 +23,8 @@ const Navbar = () => {
             <div className="container mx-auto px-4">
                 <nav className="h-16 flex justify-between items-center">
                     <div className="flex items-center gap-6">
-                        <Link to="/" className="text-2xl font-bold text-foreground hover:text-primary transition-colors">
+                        {/* --- MODIFIED: Added text-glow class --- */}
+                        <Link to="/" className="text-2xl font-bold text-foreground hover:text-primary transition-colors text-glow">
                             Code++
                         </Link>
                         <NavLink
@@ -54,7 +56,7 @@ const Navbar = () => {
                         ) : (
                             <>
                                 <Link to="/login" className={navLinkClasses}>Login</Link>
-                                <Link to="/signup" className="bg-green-700 text-primary-foreground px-4 py-2 rounded-md font-semibold hover:bg-green-700/90 transition-colors">Sign Up</Link>
+                                <Link to="/signup" className="bg-primary text-primary-foreground px-4 py-2 rounded-md font-semibold hover:bg-primary/90 transition-colors">Sign Up</Link>
                             </>
                         )}
                     </div>
