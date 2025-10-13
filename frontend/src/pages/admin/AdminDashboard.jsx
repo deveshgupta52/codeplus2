@@ -3,7 +3,6 @@ import { useAuth } from '../../context/AuthContext';
 import { Link } from 'react-router-dom';
 import { FiPlusSquare, FiTag, FiUsers, FiArrowRight } from 'react-icons/fi';
 
-// A reusable card component for the dashboard
 const DashboardCard = ({ to, icon, title, description }) => {
     return (
         <Link 
@@ -50,7 +49,6 @@ const AdminDashboard = () => {
                     title="Manage Categories"
                     description="Add, rename, and remove problem categories."
                 />
-                {/* This card is only visible to Super Admins */}
                 {isSuperAdmin && (
                     <DashboardCard 
                         to="/admin/users"
