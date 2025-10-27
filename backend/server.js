@@ -10,6 +10,7 @@ const authRoutes = require('./routes/authRoutes');
 const categoryRoutes = require('./routes/categoryRoutes');
 const questionRoutes = require('./routes/questionRoutes');
 const userRoutes = require('./routes/userRoutes');
+const runCode=require('./routes/runCode');
 
 connectDB();
 
@@ -65,7 +66,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/categories', categoryRoutes);
 app.use('/api/questions', questionRoutes);
 app.use('/api/users', userRoutes);
-
+app.use('/api/run',runCode);  // ye code execution ka route h 
 app.use(notFound);
 app.use(errorHandler);
 
