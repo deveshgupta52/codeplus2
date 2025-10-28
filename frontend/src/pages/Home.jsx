@@ -34,7 +34,7 @@ const Home = () => {
                <p className='text-white italic font-poppinsthinitalic text-[6rem] absolute top-[4rem] left-10'>Here coders </p>
                <p className='bg-my-custom-gradient tracking-tight bg-clip-text text-transparent font-poppinsbold text-[23rem] ms-3  '>evolve</p>
                <p className='font-poppinsthinitalic text-gray-200 absolute bottom-[5rem] left-10 text-[1.7rem]'>Think beyond syntax</p>
-
+{/* vghj */}
         </div>
     );
 };
