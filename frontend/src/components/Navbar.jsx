@@ -63,12 +63,22 @@ const Navbar = () => {
         //         </nav>
         //     </div>
         // </header>
-        <header className='h-[3.75rem]  flex justify-between align-center backdrop-blur-sm p-2 bg-gradient-to-r to-white/20 from-gray-400/10 rounded'>
+        <header className='h-[3.75rem]  flex justify-between items-center backdrop-blur-sm p-2 bg-gradient-to-r to-white/20 from-gray-400/10 rounded-full'>
               <div className='h-full w-[8rem]  flex items-center justify-center' >
-                <h4 className='text-white font-myfont text-xl'>Code++</h4>
+               <Link to='/'> <h4 className="text-md text-white font-extrabold">
+          C<span className="text-white font-myfont text-xl">ode++</span>
+        </h4></Link>
               </div>
-              <div className='h-full w-[60rem]  rounded '>
-
+              <div className='h-full w-[60rem]  flex items-center justify-end pr-10 gap-16'>
+                    <Link className='text-white text-sm'>Explore</Link>
+                     <Link to='/questions' className='text-white text-sm '>Problem</Link>
+                     <Link className='text-white text-sm'>How it works</Link>
+                     <div className='flex gap-4'>
+                          <Link to='/admin'> <button className='bg-black p-2 rounded-full w-32 text-gray-100 font-poppinsbold text-sm'>Admin</button></Link>
+                       <Link to='/login'> <button className='bg-black p-2 rounded-full w-32 text-gray-100 font-poppinsbold text-sm'>Signin</button></Link>
+                      <Link> <button className='bg-black p-2 rounded-full w-32 text-white font-poppinsbold text-sm'>Signup</button>
+                    </Link>
+                     </div>
               </div>
         </header>
     );
