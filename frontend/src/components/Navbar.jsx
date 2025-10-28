@@ -1,19 +1,22 @@
-import React from 'react';
-import { NavLink, Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
-import { useTheme } from '../context/ThemeContext';
-import { FiChevronDown } from 'react-icons/fi';
+import React from "react";
+import { NavLink, Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import { useTheme } from "../context/ThemeContext";
+import { FiChevronDown } from "react-icons/fi";
 
 const Navbar = () => {
-    const { user, logout, isAdmin } = useAuth();
-    const { themeId, setThemeId, themes } = useTheme();
-    const navigate = useNavigate();
+  const { user, logout, isAdmin } = useAuth();
+  const { themeId, setThemeId, themes } = useTheme();
+  const navigate = useNavigate();
 
-    const handleLogout = async () => {
-        await logout();
-        navigate('/login');
-    };
+  const handleLogout = async () => {
+    await logout();
+    navigate("/login");
+  };
 
+  const navLinkClasses =
+    "font-medium text-muted-foreground hover:text-foreground transition-colors";
+  const activeNavLinkClasses = "text-primary font-semibold";
 
     const navLinkClasses = "font-medium text-muted-foreground hover:text-foreground transition-colors";
     const activeNavLinkClasses = "text-primary font-semibold";

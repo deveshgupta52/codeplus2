@@ -3,19 +3,17 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
 @font-face {
-  font-family: 'MyFont';
-  src: url('./assets/fonts/PixelifySans[wght].ttf') format('truetype');
+  font-family: "MyFont";
+  src: url("./assets/fonts/PixelifySans[wght].ttf") format("truetype");
 }
 @font-face {
-  font-family: 'poppinsthinitalic';
-  src: url('./assets/fonts/Poppins-ThinItalic.ttf') format('truetype');
+  font-family: "poppinsthinitalic";
+  src: url("./assets/fonts/Poppins-ThinItalic.ttf") format("truetype");
 }
 @font-face {
-  font-family: 'poppinsbold';
-  src: url('./assets/fonts/Poppins-Bold.ttf') format('truetype');
+  font-family: "poppinsbold";
+  src: url("./assets/fonts/Poppins-Bold.ttf") format("truetype");
 }
 @font-face {
   font-family: 'regular';
