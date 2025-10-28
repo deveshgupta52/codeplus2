@@ -6,9 +6,9 @@ import AppRoutes from './routes/AppRoutes';
 function App() {
   return (
     // Base colors applied here
-    <div className="w-full bg-[url('./images/bgimg.svg')] bg-cover bg-center min-h-screen p-2 ">
+    <div className="w-full bg-background bg-cover bg-center min-h-screen p-2 ">
       <Navbar />
-      <main className="container mx-auto px-4 ">
+      <main className=" ">
         <AppRoutes />
       </main>
     </div>

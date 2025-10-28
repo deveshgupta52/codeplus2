@@ -80,7 +80,7 @@ const ManageCategories = () => {
 
     return (
         <div>
-            <h1 className="text-3xl font-bold mb-6">Manage Categories</h1>
+            <h1 className="text-3xl text-white font-bold mb-6">Manage Categories</h1>
             
             {status.message && <div className={`mb-4 p-3 rounded-md text-sm font-medium text-center ${status.type === 'success' ? 'bg-green-500/10 text-green-500' : 'bg-destructive/10 text-destructive'}`}>{status.message}</div>}
             <form onSubmit={handleCreate} className="mb-8 p-4 bg-card border border-border rounded-lg flex gap-4 items-end">
@@ -96,8 +96,8 @@ const ManageCategories = () => {
                 <table className="w-full text-left">
                     <thead className="border-b">
                         <tr>
-                            <th className="p-4 font-semibold">Name</th>
-                            <th className="p-4 font-semibold text-right">Actions</th>
+                            <th className="p-4 text-white font-semibold">Name</th>
+                            <th className="p-4 text-white font-semibold text-right">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -105,7 +105,7 @@ const ManageCategories = () => {
                             <tr><td colSpan="2" className="text-center p-4 text-muted-foreground">Loading...</td></tr>
                         ) : categories.map(cat => (
                             <tr key={cat._id} className="border-b last:border-none">
-                                <td className="p-4">
+                                <td className="p-4 text-white">
                                     {editingCategory?._id === cat._id ? (
                                         <form onSubmit={handleUpdate} className="flex gap-2">
                                             <input type="text" value={editingCategory.name} onChange={(e) => setEditingCategory({...editingCategory, name: e.target.value})} className="w-full px-2 py-1 text-foreground bg-background border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-ring" />

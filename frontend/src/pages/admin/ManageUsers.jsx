@@ -70,7 +70,7 @@ const ManageUsers = () => {
 
     return (
         <div>
-            <h1 className="text-3xl font-bold mb-6">Manage Users</h1>
+            <h1 className="text-3xl font-bold mb-6 text-white">Manage Users</h1>
             
             {status.message && <div className={`mb-4 p-3 rounded-md text-sm font-medium text-center ${status.type === 'success' ? 'bg-green-500/10 text-green-500' : 'bg-destructive/10 text-destructive'}`}>{status.message}</div>}
             
@@ -78,10 +78,10 @@ const ManageUsers = () => {
                 <table className="w-full text-left">
                     <thead className="border-b">
                         <tr>
-                            <th className="p-4 font-semibold">Name</th>
-                            <th className="p-4 font-semibold">Email</th>
-                            <th className="p-4 font-semibold">Role</th>
-                            <th className="p-4 font-semibold text-right">Actions</th>
+                            <th className="p-4 font-semibold text-white">Name</th>
+                            <th className="p-4 font-semibold text-white">Email</th>
+                            <th className="p-4 font-semibold text-white">Role</th>
+                            <th className="p-4 font-semibold text-right text-white">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -89,8 +89,8 @@ const ManageUsers = () => {
                             <tr><td colSpan="4" className="text-center p-4 text-muted-foreground">Loading users...</td></tr>
                         ) : users.map(user => (
                             <tr key={user._id} className="border-b last:border-none">
-                                <td className="p-4 font-medium">{user.name}</td>
-                                <td className="p-4 text-muted-foreground">{user.email}</td>
+                                <td className="p-4 font-medium text-white">{user.name}</td>
+                                <td className="p-4 text-muted-foreground text-white">{user.email}</td>
                                 <td className="p-4">
                                     {/* Prevent changing own role or a superadmin's role */}
                                     {currentUser.id === user._id || user.role === 'superadmin' ? (
@@ -99,7 +99,7 @@ const ManageUsers = () => {
                                         <select 
                                             value={user.role} 
                                             onChange={(e) => handleRoleChange(user._id, e.target.value)}
-                                            className="bg-background border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-ring"
+                                            className="bg-background border  text-white border-input rounded-md focus:outline-none focus:ring-2 focus:ring-ring"
                                         >
                                             <option value="user">user</option>
                                             <option value="admin">admin</option>

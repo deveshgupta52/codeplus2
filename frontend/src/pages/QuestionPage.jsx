@@ -67,7 +67,7 @@ const QuestionPage = () => {
 
 
     return (
-        <div className="h-[calc(100vh-4rem)] border-t border-border">
+        <div className="h-[calc(100vh-4rem)] border-t border-border ">
             <PanelGroup direction="horizontal" className="h-full w-full">
 
                 <Panel defaultSize={50} minSize={30}>

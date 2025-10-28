@@ -61,7 +61,7 @@ const ManageQuestions = () => {
     return (
         <div className="space-y-8">
             <div>
-                <h1 className="text-3xl font-bold">Manage Questions</h1>
+                <h1 className="text-3xl text-white font-bold">Manage Questions</h1>
                 <p className="text-muted-foreground mt-2">
                     Create, view, edit, and delete all coding problems.
                 </p>
@@ -73,10 +73,10 @@ const ManageQuestions = () => {
                  <table className="w-full text-left">
                     <thead className="border-b">
                         <tr>
-                            <th className="p-4 font-semibold">Title</th>
-                            <th className="p-4 font-semibold">Category</th>
-                            <th className="p-4 font-semibold">Difficulty</th>
-                            <th className="p-4 font-semibold text-right">Actions</th>
+                            <th className="p-4 font-semibold text-white">Title</th>
+                            <th className="p-4 font-semibold text-white">Category</th>
+                            <th className="p-4 font-semibold text-white">Difficulty</th>
+                            <th className="p-4 font-semibold text-white text-right">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -84,7 +84,7 @@ const ManageQuestions = () => {
                             <tr><td colSpan="4" className="text-center p-4 text-muted-foreground">Loading questions...</td></tr>
                         ) : questions.map(q => (
                             <tr key={q._id} className="border-b last:border-none">
-                                <td className="p-4 font-medium">{q.title}</td>
+                                <td className="p-4 text-white font-medium">{q.title}</td>
                                 <td className="p-4 text-muted-foreground">{q.category?.name || 'N/A'}</td>
                                 <td className="p-4 text-muted-foreground">{q.difficulty}</td>
                                 <td className="p-4 text-right">
@@ -101,7 +101,7 @@ const ManageQuestions = () => {
                 </table>
             </div>
             <div>
-                 <h2 className="text-2xl font-semibold mb-4">Create New Question</h2>
+                 <h2 className="text-2xl text-white font-semibold mb-4">Create New Question</h2>
                  <CreateQuestionForm />
             </div>
 
