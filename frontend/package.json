@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@monaco-editor/react": "^4.7.0",
+
     "axios": "^1.12.2",
     "jwt-decode": "^4.0.0",
     "react": "^19.1.1",
@@ -36,5 +37,6 @@
   },
   "overrides": {
     "vite": "npm:rolldown-vite@7.1.14"
+
   }
 }

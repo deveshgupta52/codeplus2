@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -14,11 +15,19 @@
   font-family: "poppinsbold";
   src: url("./assets/fonts/Poppins-Bold.ttf") format("truetype");
 }
+@font-face {
+  font-family: 'regular';
+  src: url('./assets/fonts/Poppins-Regular.ttf') format('truetype');
+}
+
 
 body {
   font-family: Helvetica;
+  
 }
-
+body::-webkit-scrollbar {       /* Chrome, Edge, Safari ke liye */
+  display: none;
+}
 @layer base {
   :root {
     /* These are just fallbacks; the theme files will override them */
@@ -54,7 +63,10 @@ body {
   }
   .dark .text-glow {
     /* A more pronounced glow for the dark theme with a white inner core */
-    text-shadow: 0 0 2px hsl(var(--primary-foreground) / 0.8),
-      0 0 10px hsla(var(--primary), 0.8), 0 0 22px hsla(var(--primary), 0.6);
+    text-shadow:
+      0 0 2px hsl(var(--primary-foreground) / 0.8),
+      0 0 10px hsla(var(--primary), 0.8),
+      0 0 22px hsla(var(--primary), 0.6);
+
   }
 }

@@ -18,60 +18,73 @@ const Navbar = () => {
     "font-medium text-muted-foreground hover:text-foreground transition-colors";
   const activeNavLinkClasses = "text-primary font-semibold";
 
-  return (
-    // <header className="bg-card/95 backdrop-blur-sm border-b border-border sticky top-0 z-50">
-    //     <div className="container mx-auto px-4">
-    //         <nav className="h-16 flex justify-between items-center">
-    //             <div className="flex items-center gap-6">
-    //                 {/* --- MODIFIED: Added text-glow class --- */}
-    //                 <Link to="/" className="text-2xl font-bold text-foreground hover:text-primary transition-colors text-glow">
-    //                     Code++
-    //                 </Link>
-    //                 <NavLink
-    //                     to="/questions"
-    //                     className={({ isActive }) => `${navLinkClasses} ${isActive ? activeNavLinkClasses : ""}`}
-    //                 >
-    //                     Problems
-    //                 </NavLink>
-    //             </div>
-    //             <div className="flex items-center space-x-4">
-    //                 <div className="relative">
-    //                     <select
-    //                         value={themeId}
-    //                         onChange={(e) => setThemeId(e.target.value)}
-    //                         className="appearance-none bg-secondary text-secondary-foreground rounded-md pl-3 pr-8 py-2 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-ring"
-    //                         aria-label="Select theme"
-    //                     >
-    //                         {themes.map(theme => (
-    //                             <option key={theme.id} value={theme.id}>{theme.name}</option>
-    //                         ))}
-    //                     </select>
-    //                     <FiChevronDown className="absolute right-2.5 top-1/2 -translate-y-1/2 w-4 h-4 pointer-events-none" />
-    //                 </div>
-    //                 {user ? (
-    //                     <>
-    //                         {isAdmin && <Link to="/admin" className={navLinkClasses}>Admin</Link>}
-    //                         <button onClick={handleLogout} className="bg-destructive text-destructive-foreground px-4 py-2 rounded-md font-semibold hover:bg-destructive/90 transition-colors">Logout</button>
-    //                     </>
-    //                 ) : (
-    //                     <>
-    //                         <Link to="/login" className={navLinkClasses}>Login</Link>
-    //                         <Link to="/signup" className="bg-primary text-primary-foreground px-4 py-2 rounded-md font-semibold hover:bg-primary/90 transition-colors">Sign Up</Link>
-    //                     </>
-    //                 )}
-    //             </div>
-    //         </nav>
-    //     </div>
-    // </header>
-    <header className="h-[3.75rem]  flex justify-between align-center backdrop-blur-sm p-2 bg-gradient-to-r to-white/20 from-gray-400/10 rounded sticky top-0 z-50">
-      <div className="h-full w-[8rem]  flex items-center justify-center">
-        <h4 className="text-md text-white font-extrabold">
+    const navLinkClasses = "font-medium text-muted-foreground hover:text-foreground transition-colors";
+    const activeNavLinkClasses = "text-primary font-semibold";
+
+    return (
+        // <header className="bg-card/95 backdrop-blur-sm border-b border-border sticky top-0 z-50">
+        //     <div className="container mx-auto px-4">
+        //         <nav className="h-16 flex justify-between items-center">
+        //             <div className="flex items-center gap-6">
+        //                 {/* --- MODIFIED: Added text-glow class --- */}
+        //                 <Link to="/" className="text-2xl font-bold text-foreground hover:text-primary transition-colors text-glow">
+        //                     Code++
+        //                 </Link>
+        //                 <NavLink
+        //                     to="/questions"
+        //                     className={({ isActive }) => `${navLinkClasses} ${isActive ? activeNavLinkClasses : ""}`}
+        //                 >
+        //                     Problems
+        //                 </NavLink>
+        //             </div>
+        //             <div className="flex items-center space-x-4">
+        //                 <div className="relative">
+        //                     <select
+        //                         value={themeId}
+        //                         onChange={(e) => setThemeId(e.target.value)}
+        //                         className="appearance-none bg-secondary text-secondary-foreground rounded-md pl-3 pr-8 py-2 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-ring"
+        //                         aria-label="Select theme"
+        //                     >
+        //                         {themes.map(theme => (
+        //                             <option key={theme.id} value={theme.id}>{theme.name}</option>
+        //                         ))}
+        //                     </select>
+        //                     <FiChevronDown className="absolute right-2.5 top-1/2 -translate-y-1/2 w-4 h-4 pointer-events-none" />
+        //                 </div>
+        //                 {user ? (
+        //                     <>
+        //                         {isAdmin && <Link to="/admin" className={navLinkClasses}>Admin</Link>}
+        //                         <button onClick={handleLogout} className="bg-destructive text-destructive-foreground px-4 py-2 rounded-md font-semibold hover:bg-destructive/90 transition-colors">Logout</button>
+        //                     </>
+        //                 ) : (
+        //                     <>
+        //                         <Link to="/login" className={navLinkClasses}>Login</Link>
+        //                         <Link to="/signup" className="bg-primary text-primary-foreground px-4 py-2 rounded-md font-semibold hover:bg-primary/90 transition-colors">Sign Up</Link>
+        //                     </>
+        //                 )}
+        //             </div>
+        //         </nav>
+        //     </div>
+        // </header>
+        <header className='h-[3.75rem]  flex justify-between items-center backdrop-blur-sm p-2 bg-gradient-to-r to-white/20 from-gray-400/10 rounded-full'>
+              <div className='h-full w-[8rem]  flex items-center justify-center' >
+               <Link to='/'> <h4 className="text-md text-white font-extrabold">
           C<span className="text-white font-myfont text-xl">ode++</span>
-        </h4>
-      </div>
-      <div className="h-full w-[60rem]  rounded "></div>
-    </header>
-  );
+        </h4></Link>
+              </div>
+              <div className='h-full w-[60rem]  flex items-center justify-end pr-10 gap-16'>
+                    <Link className='text-white text-sm'>Explore</Link>
+                     <Link to='/questions' className='text-white text-sm '>Problem</Link>
+                     <Link className='text-white text-sm'>How it works</Link>
+                     <div className='flex gap-4'>
+                          <Link to='/admin'> <button className='bg-black p-2 rounded-full w-32 text-gray-100 font-poppinsbold text-sm'>Admin</button></Link>
+                       <Link to='/login'> <button className='bg-black p-2 rounded-full w-32 text-gray-100 font-poppinsbold text-sm'>Signin</button></Link>
+                      <Link> <button className='bg-black p-2 rounded-full w-32 text-white font-poppinsbold text-sm'>Signup</button>
+                    </Link>
+                     </div>
+              </div>
+        </header>
+    );
 };
 
 export default Navbar;
