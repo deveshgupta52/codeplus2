@@ -26,7 +26,6 @@ const Home = () => {
                     </Link>
                 </div>
             )} */}
-
       <img
         src="./images/13.svg"
         alt=""
@@ -41,27 +40,17 @@ const Home = () => {
         src="./images/16.svg"
         alt=""
         className="absolute z-10 left-[30%] bottom-[4rem]"
-      />
-      <div className="flex flex-col">
-        <div>
-          {" "}
-          <p className="text-white italic font-poppinsthinitalic text-[6rem] absolute top-[4rem] left-10">
-            Here coders{" "}
-          </p>
-          <p className="bg-my-custom-gradient tracking-tight bg-clip-text text-transparent font-poppinsbold text-[23rem] ms-3  ">
-            evolve
-          </p>
-          <p className="font-poppinsthinitalic text-gray-200 absolute bottom-[5rem] left-10 text-[1.7rem]">
-            Think beyond syntax
-          </p>
-          {/* vghj */}
-        </div>
-        <div className="pl-10">
-          <button className="p-4 w-44 rounded-full text-white bg-fuchsia-900 font-bold">
-            Dominate Now
-          </button>
-        </div>
-      </div>
+      />{" "}
+      <p className="text-white italic font-poppinsthinitalic text-[6rem] absolute top-[4rem] left-10">
+        Here coders{" "}
+      </p>
+      <p className="bg-my-custom-gradient tracking-tight bg-clip-text text-transparent font-poppinsbold text-[23rem] ms-3  ">
+        evolve
+      </p>
+      <p className="font-poppinsthinitalic text-gray-200 absolute bottom-[5rem] left-10 text-[1.7rem]">
+        Think beyond syntax
+      </p>
+      {/* vghj */}
     </div>
   );
 };
