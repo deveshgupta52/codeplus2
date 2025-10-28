@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const Home = () => {
     const { user } = useAuth();
     return (
-        <div className=" relative bg-[url('./images/bgimg.svg')]">
+        <div className=" relative bg-[url('./images/bgimg.svg')] bg-cover bg-center">
         
             {/* <h1 className="text-4xl md:text-5xl font-extrabold mb-4 text-primary text-glow">
                 Welcome to Code++

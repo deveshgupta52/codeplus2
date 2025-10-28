@@ -14,12 +14,12 @@ const Navbar = () => {
     navigate("/login");
   };
 
-  const navLinkClasses =
-    "font-medium text-muted-foreground hover:text-foreground transition-colors";
-  const activeNavLinkClasses = "text-primary font-semibold";
+//   const navLinkClasses =
+//     "font-medium text-muted-foreground hover:text-foreground transition-colors";
+//   const activeNavLinkClasses = "text-primary font-semibold";
 
-    const navLinkClasses = "font-medium text-muted-foreground hover:text-foreground transition-colors";
-    const activeNavLinkClasses = "text-primary font-semibold";
+//     const navLinkClasses = "font-medium text-muted-foreground hover:text-foreground transition-colors";
+//     const activeNavLinkClasses = "text-primary font-semibold";
 
     return (
         // <header className="bg-card/95 backdrop-blur-sm border-b border-border sticky top-0 z-50">
@@ -78,8 +78,8 @@ const Navbar = () => {
                      <Link className='text-white text-sm'>How it works</Link>
                      <div className='flex gap-4'>
                           <Link to='/admin'> <button className='bg-black p-2 rounded-full w-32 text-gray-100 font-poppinsbold text-sm'>Admin</button></Link>
-                       <Link to='/login'> <button className='bg-black p-2 rounded-full w-32 text-gray-100 font-poppinsbold text-sm'>Signin</button></Link>
-                      <Link> <button className='bg-black p-2 rounded-full w-32 text-white font-poppinsbold text-sm'>Signup</button>
+                       <Link to='/login'> <button className='bg-black p-2 rounded-full w-32 text-gray-100 font-poppinsbold text-sm'>Login</button></Link>
+                      <Link to='/signup'> <button className='bg-black p-2 rounded-full w-32 text-white font-poppinsbold text-sm'>Signup</button>
                     </Link>
                      </div>
               </div>
