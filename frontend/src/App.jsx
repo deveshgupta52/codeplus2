@@ -4,9 +4,9 @@ import AppRoutes from './routes/AppRoutes';
 function App() {
   return (
     // Base colors applied here
-    <div className="bg-background text-foreground min-h-screen">
+    <div className="w-full bg-[url('./images/bgimg.svg')] bg-cover bg-center min-h-screen">
       <Navbar />
-      <main className="container mx-auto px-4 py-8">
+      <main className="container mx-auto px-4 ">
         <AppRoutes />
       </main>
     </div>

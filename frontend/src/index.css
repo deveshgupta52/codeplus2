@@ -2,6 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
+@font-face {
+  font-family: 'MyFont';
+  src: url('./assets/fonts/PixelifySans[wght].ttf') format('truetype');
+}
+@font-face {
+  font-family: 'poppinsthinitalic';
+  src: url('./assets/fonts/Poppins-ThinItalic.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'poppinsbold';
+  src: url('./assets/fonts/Poppins-Bold.ttf') format('truetype');
+}
+
+body {
+  font-family: Helvetica;
+}
+
 @layer base {
   :root {
     /* These are just fallbacks; the theme files will override them */
@@ -28,6 +47,9 @@
 
 /* --- NEW: Custom Neon Glow Utility --- */
 @layer utilities {
+  .font-superthin {
+    font-weight: 50; /* aur patla look */
+  }
   .text-glow {
     /* A subtle glow for the light theme */
     text-shadow: 0 0 8px hsla(var(--primary), 0.5);

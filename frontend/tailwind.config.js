@@ -4,6 +4,15 @@ export default {
   theme: {
     extend: {
       // ... (your existing colors and borderRadius extensions)
+
+      backgroundImage: {
+        'my-custom-gradient': 'linear-gradient(to right, #F28F36 9%, #D400F5 25%, #009DFF 63%, #FF8000 81%)',
+      },
+       fontFamily: {
+    myfont: ['MyFont'],
+    poppinsthinitalic:['poppinsthinitalic'],
+    poppinsbold:['poppinsbold']
+  },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
