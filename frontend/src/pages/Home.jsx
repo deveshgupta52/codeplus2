@@ -31,10 +31,12 @@ const Home = () => {
                     <img src="./images/13.svg" alt="" className='absolute z-10 left-[50%] top-[10]' />
                   <img src="./images/1.svg" alt="" className='absolute z-10 left-[50%] bottom-[0]' />
                     <img src="./images/16.svg" alt="" className='absolute z-10 left-[30%] bottom-[4rem]' />
-               <p className='text-white italic font-poppinsthinitalic text-[6rem] absolute top-[4rem] left-10'>Here coders </p>
-               <p className='bg-my-custom-gradient tracking-tight bg-clip-text text-transparent font-poppinsbold text-[23rem] ms-3  '>evolve</p>
+<div >
+                   <p className='text-white ml-10 italic font-poppinsthinitalic text-[6rem] absolute top-[4rem] left-10'>Here coders </p>
+               <p className='bg-my-custom-gradient tracking-tight bg-clip-text text-transparent font-poppinsbold text-[23rem] ml-10  '>evolve</p>
+</div>
               <div className='absolute bottom-[3rem] left-10 '>
-                 <div className='flex gap-5'>
+                 <div className='flex gap-5 ml-10'>
                     <p className='font-poppinsthinitalic text-gray-200  text-[1.7rem]'>Think beyond syntax</p>
                     <Link to='/login'><button className=" px-8 py-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full font-semibold text-white hover:scale-105 transition">
           Dominate Now

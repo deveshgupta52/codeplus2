@@ -57,7 +57,8 @@ const QuestionPage = () => {
         language,
 
        });   // ye code aur language code backend ko send krta h 
-       setOutput(response.data.output);  // ye output dikhana h frontend pr anbhi frontend nhi bna
+    //    setOutput(response.data.output);
+       setOutput(response.data.stdout); // ye output dikhana h frontend pr anbhi frontend nhi bna
        }catch(err){
         console.error(err);
         setOutput("error running code");
@@ -108,7 +109,7 @@ const QuestionPage = () => {
 
                                 <div className="flex justify-end p-2 border-b border-border bg-muted/30">
                                <label for="languageSelector" className="text-white p-2">Select Language:</label>
-<select onChange={(e)=>{setLanguage(e.target.value)}} id="languageSelector" className="bg-black text-white p-2 mx-2 rounded-md">
+<select onChange={(e)=>{setLanguage(e.target.value); setCode("")}} id="languageSelector" className="bg-black text-white p-2 mx-2 rounded-md">
   <option value="54">C++</option>
   <option value="71">Python</option>
   <option value="62">Java</option>
@@ -147,11 +148,14 @@ const QuestionPage = () => {
 
                         <Panel defaultSize={30} minSize={15}>
                             <div className="h-full overflow-y-auto p-4">
-                                <h2 className="text-lg font-semibold mb-3 text-foreground">Test Cases</h2>
+                                <h2 className="text-lg font-semibold mb-3 text-foreground">Output</h2>
+
+                                <h2 className='text-green-500'>{output}</h2>
                                 <div className="space-y-3">
+
                                     {question.visibleTestCases.map((testCase, index) => (
                                         <div key={index} className="bg-muted/50 p-3 rounded-md border border-border">
-                                            <p className="text-sm font-medium text-muted-foreground">Case {index + 1}</p>
+                                            {/* <p className="text-sm font-medium text-muted-foreground">Case {index + 1}</p> */}
                                             <pre className="mt-1 text-xs font-mono bg-background p-2 rounded whitespace-pre-wrap">
                                                 <code>
                                                     {`Input: ${testCase.input}\nOutput: ${testCase.output}`}
