@@ -6,7 +6,6 @@ const Home = () => {
     const { user } = useAuth();
     return (
         <div className="container mx-auto px-4 py-16 text-center">
-            {/* --- MODIFIED: Removed old gradient classes, added text-primary --- */}
             <h1 className="text-4xl md:text-5xl font-extrabold mb-4 text-primary text-glow">
                 Welcome to Code++
             </h1>

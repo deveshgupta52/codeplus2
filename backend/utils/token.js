@@ -4,7 +4,7 @@ const sendTokens = (res, user) => {
     const accessToken = jwt.sign(
         { id: user._id, role: user.role },
         process.env.ACCESS_TOKEN_SECRET,
-        { expiresIn: '24h' } 
+        { expiresIn: '720h' } 
     );
 
     const refreshToken = jwt.sign(

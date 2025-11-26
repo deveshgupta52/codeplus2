@@ -6,10 +6,11 @@ import PrivateRoute from './PrivateRoute';
 import AdminLayout from '../pages/admin/AdminLayout';
 import AdminDashboard from '../pages/admin/AdminDashboard';
 import ManageQuestions from '../pages/admin/ManageQuestions';
-import ManageCategories from '../pages/admin/ManageCategories'; // NEW
-import ManageUsers from '../pages/admin/ManageUsers'; // NEW
+import ManageCategories from '../pages/admin/ManageCategories';
+import ManageUsers from '../pages/admin/ManageUsers';
 import Questions from '../pages/Questions';
 import QuestionPage from '../pages/QuestionPage';
+import UserProfile from '../pages/UserProfile';
 
 const AppRoutes = () => {
     return (
@@ -21,7 +22,12 @@ const AppRoutes = () => {
             <Route path="/questions" element={<Questions />} />
             <Route path="/questions/:id" element={<QuestionPage />} />
 
-            {/* Protected Admin Routes */}
+            {/* This is accessible to ANY logged-in user */}
+            <Route element={<PrivateRoute allowedRoles={['user', 'admin', 'superadmin']} />}>
+                <Route path="/profile" element={<UserProfile />} />
+            </Route>
+
+            {/* Protected Admin-Only Routes */}
             <Route element={<PrivateRoute allowedRoles={['admin', 'superadmin']} />}>
                 <Route path="/admin" element={<AdminLayout />}>
                     <Route index element={<AdminDashboard />} />

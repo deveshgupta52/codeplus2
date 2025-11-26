@@ -1,18 +1,23 @@
 import React, { createContext, useState, useEffect, useContext, useMemo } from 'react';
 import { loader } from "@monaco-editor/react";
+import { darkTheme } from '../themes/dark';
+import { lightTheme } from '../themes/light';
 
-const themeModules = import.meta.glob('../themes/*.js', { eager: true });
-
-const themes = Object.entries(themeModules).map(([path, module]) => {
-  return { ...Object.values(module)[0] };
-});
+const themes = [darkTheme, lightTheme];
 
 const ThemeContext = createContext();
 export const useTheme = () => useContext(ThemeContext);
 
 export const ThemeProvider = ({ children }) => {
   const [themeId, setThemeId] = useState(() => localStorage.getItem('theme') || 'dark');
-  const activeTheme = useMemo(() => themes.find(t => t.id === themeId), [themeId]);
+  
+  const activeTheme = useMemo(() => {
+      return themes.find(t => t.id === themeId) || darkTheme; 
+  }, [themeId]);
+
+  const toggleTheme = () => {
+    setThemeId(prevId => (prevId === 'dark' ? 'light' : 'dark'));
+  };
 
   useEffect(() => {
     if (activeTheme) {
@@ -22,11 +27,16 @@ export const ThemeProvider = ({ children }) => {
       localStorage.setItem('theme', themeId);
 
       loader.init().then((monaco) => {
-        monaco.editor.defineTheme(activeTheme.id, activeTheme.editorTheme);
+        try {
+            monaco.editor.defineTheme(darkTheme.id, darkTheme.editorTheme);
+            monaco.editor.defineTheme(lightTheme.id, lightTheme.editorTheme);
+        } catch (e) {
+        }
       });
     }
   }, [activeTheme, themeId]);
 
-  const value = { themeId, setThemeId, themes, activeTheme };
+  const value = { themeId, setThemeId, themes, activeTheme, toggleTheme };
+  
   return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;
 };

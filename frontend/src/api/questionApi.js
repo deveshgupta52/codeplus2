@@ -7,23 +7,25 @@ export const deleteQuestion = (id) => api.delete(`/api/questions/${id}`);
 export const createQuestion = (questionData) => {
     const formData = new FormData();
     for (const key in questionData) {
-        if (questionData[key] !== null) {
+        if (key === 'starterCode' || key === 'driverCode') {
+             formData.append(key, JSON.stringify(questionData[key]));
+        } else if (questionData[key] !== null) {
             formData.append(key, questionData[key]);
         }
     }
-    return api.post('/api/questions', formData, {
-        headers: { 'Content-Type': 'multipart/form-data' },
-    });
+    return api.post('/api/questions', formData, { headers: { 'Content-Type': 'multipart/form-data' } });
 };
 
 export const updateQuestion = (id, questionData) => {
     const formData = new FormData();
     for (const key in questionData) {
-        if (questionData[key] !== null) {
+        if (key === 'image' && questionData[key] instanceof File) {
+             formData.append(key, questionData[key]);
+        } else if (key === 'starterCode' || key === 'driverCode') {
+             formData.append(key, JSON.stringify(questionData[key]));
+        } else if (key !== 'image' && questionData[key] !== null) {
             formData.append(key, questionData[key]);
         }
     }
-    return api.put(`/api/questions/${id}`, formData, {
-        headers: { 'Content-Type': 'multipart/form-data' },
-    });
+    return api.put(`/api/questions/${id}`, formData, { headers: { 'Content-Type': 'multipart/form-data' } });
 };

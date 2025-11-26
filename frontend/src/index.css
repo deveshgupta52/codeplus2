@@ -4,7 +4,6 @@
 
 @layer base {
   :root {
-    /* These are just fallbacks; the theme files will override them */
     --background: 0 0% 90%;
     --foreground: 222.2 84% 4.9%;
     --card: 0 0% 100%;
@@ -25,15 +24,12 @@
     --radius: 0.5rem;
   }
 }
-
-/* --- NEW: Custom Neon Glow Utility --- */
 @layer utilities {
   .text-glow {
-    /* A subtle glow for the light theme */
+
     text-shadow: 0 0 8px hsla(var(--primary), 0.5);
   }
   .dark .text-glow {
-    /* A more pronounced glow for the dark theme with a white inner core */
     text-shadow:
       0 0 2px hsl(var(--primary-foreground) / 0.8),
       0 0 10px hsla(var(--primary), 0.8),

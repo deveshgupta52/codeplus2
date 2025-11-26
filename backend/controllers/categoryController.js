@@ -30,7 +30,6 @@ const getCategories = async (req, res, next) => {
     }
 };
 
-// --- NEW FUNCTION ---
 const updateCategory = async (req, res, next) => {
     const { name } = req.body;
     if (!name) {

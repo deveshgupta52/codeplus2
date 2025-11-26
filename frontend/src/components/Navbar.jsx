@@ -13,8 +13,6 @@ const Navbar = () => {
         await logout();
         navigate('/login');
     };
-
-
     const navLinkClasses = "font-medium text-muted-foreground hover:text-foreground transition-colors";
     const activeNavLinkClasses = "text-primary font-semibold";
 
@@ -23,7 +21,6 @@ const Navbar = () => {
             <div className="container mx-auto px-4">
                 <nav className="h-16 flex justify-between items-center">
                     <div className="flex items-center gap-6">
-                        {/* --- MODIFIED: Added text-glow class --- */}
                         <Link to="/" className="text-2xl font-bold text-foreground hover:text-primary transition-colors text-glow">
                             Code++
                         </Link>
@@ -35,24 +32,19 @@ const Navbar = () => {
                         </NavLink>
                     </div>
                     <div className="flex items-center space-x-4">
-                        <div className="relative">
-                            <select
-                                value={themeId}
-                                onChange={(e) => setThemeId(e.target.value)}
-                                className="appearance-none bg-secondary text-secondary-foreground rounded-md pl-3 pr-8 py-2 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-ring"
-                                aria-label="Select theme"
-                            >
-                                {themes.map(theme => (
-                                    <option key={theme.id} value={theme.id}>{theme.name}</option>
-                                ))}
-                            </select>
-                            <FiChevronDown className="absolute right-2.5 top-1/2 -translate-y-1/2 w-4 h-4 pointer-events-none" />
-                        </div>
+
                         {user ? (
                             <>
+                                <NavLink 
+                                    to="/profile" 
+                                    className={({ isActive }) => `${navLinkClasses} ${isActive ? activeNavLinkClasses : ""}`}
+                                >
+                                    Profile
+                                </NavLink>
                                 {isAdmin && <Link to="/admin" className={navLinkClasses}>Admin</Link>}
                                 <button onClick={handleLogout} className="bg-destructive text-destructive-foreground px-4 py-2 rounded-md font-semibold hover:bg-destructive/90 transition-colors">Logout</button>
                             </>
+                            
                         ) : (
                             <>
                                 <Link to="/login" className={navLinkClasses}>Login</Link>

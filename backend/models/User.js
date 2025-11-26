@@ -29,7 +29,27 @@ const userSchema = new mongoose.Schema({
     },
     refreshToken: {
         type: String,
+        select: false,
     },
+    solvedQuestions: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Question'
+    }],
+    totalSubmissions: {
+        type: Number,
+        default: 0
+    },
+    currentStreak: {
+        type: Number,
+        default: 0
+    },
+    longestStreak: {
+        type: Number,
+        default: 0
+    },
+    lastSubmissionDate: {
+        type: Date
+    }
 }, {
     timestamps: true,
 });
@@ -45,6 +65,9 @@ userSchema.pre('save', async function (next) {
 
 userSchema.methods.matchPassword = async function (enteredPassword) {
     const user = await this.constructor.findById(this._id).select('+password');
+    if (!user) {
+        return false;
+    }
     return await bcrypt.compare(enteredPassword, user.password);
 };
 
