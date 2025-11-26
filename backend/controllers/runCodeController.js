@@ -6,13 +6,14 @@ const languageMap = {
 };
 
 const getFullCode = (driver, placeholder, source_code, langKey) => {
-    const placeholderLineIndex = driver.split('\n').findIndex(line => line.includes(placeholder));
+    const driverLines = driver.split('\n');
+    const placeholderLineIndex = driverLines.findIndex(line => line.includes(placeholder));
+
     if (placeholderLineIndex === -1) {
-        throw new Error('Server configuration error: Driver code is invalid.');
+        throw new Error('Server configuration error: Driver code is invalid or placeholder is missing.');
     }
 
     if (langKey === 'python') {
-        const driverLines = driver.split('\n');
         const placeholderLine = driverLines[placeholderLineIndex];
         const placeholderIndentMatch = placeholderLine.match(/^(\s*)/);
         const placeholderIndent = placeholderIndentMatch ? placeholderIndentMatch[0] : '';
@@ -23,6 +24,7 @@ const getFullCode = (driver, placeholder, source_code, langKey) => {
                        indentedUserCode + '\n' +
                        driverLines.slice(placeholderLineIndex + 1).join('\n');
         
+        // Remove the 'pass' statement if it's there and was indented by the placeholder
         fullCode = fullCode.replace(new RegExp('^' + placeholderIndent + 'pass *$', 'gm'), '');
         return fullCode;
     } else {
@@ -101,23 +103,32 @@ const runCode = async (req, res, next) => {
         });
 
     } catch (err) {
-         console.error("Judge0 API Error:", err.response?.data || err.message || err);
-         const statusCode = err.response?.status || 500;
-         let errorMessage = "Code execution failed.";
-         if (err.code === 'ECONNABORTED') { errorMessage = "Code execution timed out."; statusCode = 408; }
-         else if (err.response?.data) {
-              if (err.response.data.stderr) {
-                  const decodedErr = Buffer.from(err.response.data.stderr, 'base64').toString('utf-8');
-                  if (decodedErr.includes("IndentationError")) {
-                      errorMessage = "Indentation Error detected. Please check your Python code's indentation.";
-                      statusCode = 400;
-                  } else {
-                      errorMessage = decodedErr;
-                  }
-              } else {
-                 errorMessage = err.response.data.error || err.response.data.message || "External execution server error.";
-              }
-         } else if (err.message) { errorMessage = err.message; }
+        console.error("Judge0 API Error:", err.response?.data || err.message || err);
+        const statusCode = err.response?.status || 500;
+        let errorMessage = "An unexpected error occurred during code execution.";
+
+        if (err.code === 'ECONNABORTED') {
+            errorMessage = "Code execution timed out.";
+        } else if (err.response?.data) {
+            const { message, stderr, compile_output, error } = err.response.data;
+            if (error) {
+                errorMessage = error;
+            } else if (message) {
+                const decodedMessage = Buffer.from(message, 'base64').toString('utf-8');
+                errorMessage = `Execution Error: ${decodedMessage}`;
+            } else if (stderr) {
+                const decodedStderr = Buffer.from(stderr, 'base64').toString('utf-8');
+                errorMessage = `Runtime Error: ${decodedStderr}`;
+            } else if (compile_output) {
+                const decodedCompileOutput = Buffer.from(compile_output, 'base64').toString('utf-8');
+                errorMessage = `Compilation Error: ${decodedCompileOutput}`;
+            } else {
+                errorMessage = "An unknown error occurred with the execution service.";
+            }
+        } else if (err.message) {
+            errorMessage = err.message;
+        }
+
         res.status(statusCode).json({ error: errorMessage });
     }
 };
