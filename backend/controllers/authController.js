@@ -27,7 +27,7 @@ const signup = async (req, res, next) => {
 const login = async (req, res, next) => {
     const { email, password } = req.body;
     try {
-        const user = await User.findOne({ email });
+        const user = await User.findOne({ email }).select('+password');
         if (user && (await user.matchPassword(password))) {
             sendTokens(res, user);
             await user.save({ validateBeforeSave: false });
