@@ -30,6 +30,12 @@ const Navbar = () => {
                         >
                             Problems
                         </NavLink>
+                        <NavLink
+                            to="/discussion"
+                            className={({ isActive }) => `${navLinkClasses} ${isActive ? activeNavLinkClasses : ""}`}
+                        >
+                            Discussion
+                        </NavLink>
                     </div>
                     <div className="flex items-center space-x-4">
 

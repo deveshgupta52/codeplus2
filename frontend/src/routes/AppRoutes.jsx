@@ -12,6 +12,8 @@ import Questions from '../pages/Questions';
 import QuestionPage from '../pages/QuestionPage';
 import UserProfile from '../pages/UserProfile';
 
+import Discussion from '../pages/Discussion';
+
 const AppRoutes = () => {
     return (
         <Routes>
@@ -21,6 +23,7 @@ const AppRoutes = () => {
             <Route path="/signup" element={<Signup />} />
             <Route path="/questions" element={<Questions />} />
             <Route path="/questions/:id" element={<QuestionPage />} />
+            <Route path="/discussion" element={<Discussion />} />
 
             {/* This is accessible to ANY logged-in user */}
             <Route element={<PrivateRoute allowedRoles={['user', 'admin', 'superadmin']} />}>

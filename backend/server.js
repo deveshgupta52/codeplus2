@@ -69,6 +69,7 @@ app.use('/api/categories', categoryRoutes);
 app.use('/api/questions', questionRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/code', codeRoutes);
+app.use('/api', require('./routes/discussionRoutes'));
 
 const frontendBuildPath = path.resolve(__dirname, '..', 'frontend', 'dist'); 
 if (process.env.NODE_ENV === 'production' || fs.existsSync(frontendBuildPath)) {
