@@ -19,7 +19,7 @@ const getFullCode = (driver, placeholder, source_code, langKey) => {
         const placeholderIndentMatch = placeholderLine.match(/^(\s*)/);
         const placeholderIndent = placeholderIndentMatch ? placeholderIndentMatch[0] : '';
         const userLines = source_code.split('\n');
-        const indentedUserCode = userLines.map(line => (line.trim() === '' ? '' : placeholderIndent + line)).join('\n');
+        const indentedUserCode = userLines.map(line => placeholderIndent + line).join('\n');
         
         let fullCode = driverLines.slice(0, placeholderLineIndex).join('\n') + '\n' +
                        indentedUserCode + '\n' +
@@ -89,7 +89,7 @@ const runSingleTestCase = async (apiKey, fullCode, language_id, stdin, expected_
                 detailedError = Buffer.from(stderr, 'base64').toString('utf-8');
             } else if (message) {
                 statusDescription = "Execution Error";
-                detailedError = Buffer.from(message, 'base64').toString('utf-8');
+                detailedError = message;
             }
         } else if (err.message) {
             detailedError = err.message;

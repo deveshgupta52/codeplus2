@@ -1,0 +1,23 @@
+in this project there are feature to run and submit code thats not working check why it isnt !
+
+its like leetcode get context of complete project fist there are testcases and driver codes for feeded languages in the dataase!!
+
+check related frontend and backend for run code and submit code!! donot change anything unnecessarily donot use git commands
+
+i am giving you complete control of all files go throught the ones related to this matter correct them test them using terminals / api/controllers/scripts(scripts are better for this
+
+just completely solve this issue check seed for languages problems driver codes starter codes and their integratioions etc
+
+check frontend and backend
+
+do testing using temperory scripts but i want this issu resolved
+
+Note:do not use git commands to commit changes!!!!
+
+and try to be slow as in to not deplete minute limit of yourself!!!
+
+i have already started frontend and backend using npm run dev it shall renew at each change so work without worrying about servers!!
+
+test for all problems and all languages solutions and on all testcases!! using driver and starter code integration!!!!!!
+
+use armaansiddiqui.pms@gmail.com pass is 12345 for user!!!!!!!! instead of dummy user!!

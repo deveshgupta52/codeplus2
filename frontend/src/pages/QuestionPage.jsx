@@ -25,10 +25,8 @@ const QuestionPage = () => {
     const [error, setError] = useState('');
     const [selectedLanguage, setSelectedLanguage] = useState(LANGUAGES[0]);
     const [editorCode, setEditorCode] = useState('');
-    const [stdin, setStdin] = useState('');
-    
     const [isRunning, setIsRunning] = useState(false);
-    const [runOutput, setRunOutput] = useState(null);
+    const [runResults, setRunResults] = useState([]);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitResult, setSubmitResult] = useState(null);
     const [activeTab, setActiveTab] = useState('testcases');
@@ -45,10 +43,6 @@ const QuestionPage = () => {
                 const initialCode = data.starterCode?.[initialLang.key] || `// Starter code for ${initialLang.name} not available\n`;
                 setEditorCode(initialCode);
                 
-                if (data.visibleTestCases && data.visibleTestCases.length > 0) {
-                    setStdin(data.visibleTestCases[0].input);
-                }
-                
             } catch (err) { setError('Failed to load the question.'); }
             finally { setLoading(false); }
         };
@@ -60,20 +54,20 @@ const QuestionPage = () => {
         if (question?.starterCode) {
             const newCode = question.starterCode[selectedLanguage.key] || `// Starter code for ${selectedLanguage.name} not available\n`;
             setEditorCode(newCode);
-            
         }
     }, [selectedLanguage, question]);
 
     const handleRunCode = async () => {
         if (!editorRef.current || !question) return;
         const source_code = editorRef.current.getValue();
-        setIsRunning(true); setRunOutput(null); setActiveTab('run');
+        setIsRunning(true); setRunResults([]); setActiveTab('run');
         
         try {
-            const { data } = await runCode(source_code, selectedLanguage.id, question._id, stdin);
-            setRunOutput(data);
+            const { data } = await runCode(source_code, selectedLanguage.id, question._id);
+            setRunResults(data.results || []);
         } catch (err) {
-            setRunOutput({ status: { description: 'API Error' }, stderr: err.response?.data?.error || 'Failed to connect.' });
+            const errorMsg = err.response?.data?.error || 'Failed to connect to the execution service.';
+            setRunResults([{ status: { description: 'API Error' }, stderr: errorMsg, input: 'N/A', expected: 'N/A' }]);
         } finally { setIsRunning(false); }
     };
 
@@ -100,35 +94,64 @@ const QuestionPage = () => {
     if (error) { return <div className="flex items-center justify-center h-[calc(100vh-4rem)]"><p className="text-destructive">{error}</p></div>; }
     if (!question) { return <div className="flex items-center justify-center h-[calc(100vh-4rem)]"><p>Question not found.</p></div>; }
 
-    const renderRunOutput = () => {
-        if (isRunning) return <div className="p-4 text-muted-foreground"><FiLoader className="animate-spin h-5 w-5 mr-2 inline" /> Running code...</div>;
-        if (!runOutput) return <div className="p-4 text-muted-foreground italic">Click "Run" to test your code against the custom input.</div>;
+    const renderRunResults = () => {
+        if (isRunning) return <div className="p-4 text-muted-foreground"><FiLoader className="animate-spin h-5 w-5 mr-2 inline" /> Running visible test cases...</div>;
+        if (!runResults || runResults.length === 0) return <div className="p-4 text-muted-foreground italic">Click "Run" to test your code against the visible test cases.</div>;
         
-        let icon = <FiTerminal className="h-5 w-5 mr-2" />;
-        let title = runOutput.status?.description || 'Output';
-        let content = runOutput.stdout;
-        let colorClass = 'text-foreground';
-        
-        if (runOutput.stderr) { icon = <FiAlertTriangle className="h-5 w-5 mr-2 text-red-500" />; title = 'Runtime Error'; content = runOutput.stderr; colorClass = 'text-red-500'; }
-        else if (runOutput.compile_output) { icon = <FiAlertTriangle className="h-5 w-5 mr-2 text-yellow-500" />; title = 'Compilation Error'; content = runOutput.compile_output; colorClass = 'text-yellow-500'; }
-        else if (runOutput.status?.id === 3) { icon = <FiTerminal className="h-5 w-5 mr-2 text-green-500" />; title = 'Finished'; colorClass = 'text-green-500'; }
-
         return (
-            <div className="p-4">
-                <div className={`flex items-center text-lg font-semibold mb-2 ${colorClass}`}> {icon} {title} </div>
-                <h4 className="text-xs font-semibold text-muted-foreground mb-1">Input (stdin):</h4>
-                <pre className="text-xs font-mono bg-muted/50 p-2 rounded whitespace-pre-wrap mb-3"><code>{stdin || '(empty)'}</code></pre>
+            <div className="p-4 space-y-3">
+                {runResults.map((result, index) => {
+                    const isAccepted = result.status.id === 3 && result.stdout === result.expected;
+                    const isWrongAnswer = result.status.id === 3 && result.stdout !== result.expected;
+                    
+                    let title = result.status.description;
+                    let titleColor = 'text-foreground';
+                    let icon = <FiTerminal className="h-5 w-5 mr-2" />;
 
-                <h4 className="text-xs font-semibold text-muted-foreground mb-1">Output (stdout):</h4>
-                {content ? (<pre className="text-xs font-mono bg-muted/50 p-2 rounded whitespace-pre-wrap"><code className={colorClass}>{content}</code></pre>)
-                 : (<p className="text-xs text-muted-foreground italic">No output produced.</p>)}
-                
-                {runOutput.time !== undefined && runOutput.memory !== undefined && (
-                    <div className="flex gap-4 text-xs mt-2 text-muted-foreground">
-                        <span>Time: {runOutput.time}s</span>
-                        <span>Memory: {runOutput.memory ? (runOutput.memory / 1024).toFixed(2) : 'N/A'} MB</span>
-                    </div>
-                )}
+                    if (isAccepted) {
+                        title = 'Accepted'; titleColor = 'text-green-500'; icon = <FiCheckCircle className="h-5 w-5 mr-2" />;
+                    } else if (isWrongAnswer) {
+                        title = 'Wrong Answer'; titleColor = 'text-red-500'; icon = <FiAlertTriangle className="h-5 w-5 mr-2" />;
+                    } else if (result.status.id > 3) { // Any kind of error
+                        titleColor = 'text-red-500'; icon = <FiAlertTriangle className="h-5 w-5 mr-2" />;
+                    }
+
+                    return (
+                        <details key={index} className="bg-muted/50 border border-border rounded-lg" open>
+                            <summary className={`flex items-center cursor-pointer p-3 font-semibold ${titleColor}`}>
+                                {icon} Case {index + 1}: {title}
+                            </summary>
+                            <div className="p-3 border-t border-border">
+                                <div>
+                                    <h4 className="text-xs font-semibold text-muted-foreground mb-1">Input:</h4>
+                                    <pre className="text-xs font-mono bg-background p-2 rounded whitespace-pre-wrap"><code>{result.input}</code></pre>
+                                </div>
+                                <div className="mt-2">
+                                    <h4 className="text-xs font-semibold text-muted-foreground mb-1">Expected Output:</h4>
+                                    <pre className="text-xs font-mono bg-background p-2 rounded whitespace-pre-wrap"><code>{result.expected}</code></pre>
+                                </div>
+                                <div className="mt-2">
+                                    <h4 className="text-xs font-semibold text-muted-foreground mb-1">Your Output:</h4>
+                                    {result.stdout !== null && result.stdout !== undefined ? (
+                                        <pre className={`text-xs font-mono bg-background p-2 rounded whitespace-pre-wrap ${isWrongAnswer ? 'text-red-500' : 'text-foreground'}`}><code>{result.stdout}</code></pre>
+                                    ) : (
+                                        <p className="text-xs text-muted-foreground italic">No output (stdout).</p>
+                                    )}
+                                </div>
+                                {result.stderr && (
+                                    <div className="mt-2">
+                                        <h4 className="text-xs font-semibold text-red-500 mb-1">Error (stderr):</h4>
+                                        <pre className="text-xs font-mono bg-background text-red-500 p-2 rounded whitespace-pre-wrap"><code>{result.stderr}</code></pre>
+                                    </div>
+                                )}
+                                <div className="flex gap-4 text-xs mt-2 text-muted-foreground">
+                                    <span>Time: {result.time}s</span>
+                                    <span>Memory: {result.memory ? (result.memory / 1024).toFixed(2) : 'N/A'} MB</span>
+                                </div>
+                            </div>
+                        </details>
+                    );
+                })}
             </div>
         );
      };
@@ -249,24 +272,17 @@ const QuestionPage = () => {
                                 <div className="flex-1 overflow-y-auto">
                                     {activeTab === 'testcases' && (
                                         <div className="p-4 space-y-4">
-                                            <div>
-                                                <label htmlFor="stdin" className="block text-sm font-semibold mb-2 text-foreground">Custom Input (for "Run")</label>
-                                                <textarea id="stdin" rows="3" value={stdin} onChange={(e) => setStdin(e.target.value)} placeholder="Enter custom input here..." className="w-full p-2 text-xs font-mono bg-muted/50 border border-border rounded-md focus:outline-none focus:ring-1 focus:ring-ring resize-none"/>
-                                            </div>
                                             <div className="space-y-3">
                                                 {question.visibleTestCases.map((testCase, index) => (
                                                     <div key={index} className="bg-muted/50 p-3 rounded-md border border-border">
-                                                        <div className="flex justify-between items-center mb-1">
-                                                            <p className="text-sm font-medium text-muted-foreground">Case {index + 1}</p>
-                                                            <button onClick={() => setStdin(testCase.input)} className="text-xs text-primary hover:underline">Copy Input</button>
-                                                        </div>
+                                                        <p className="text-sm font-medium text-muted-foreground mb-1">Case {index + 1}</p>
                                                         <pre className="mt-1 text-xs font-mono bg-background p-2 rounded whitespace-pre-wrap"><code>{`Input:\n${testCase.input}\n\nExpected Output:\n${testCase.output}`}</code></pre>
                                                     </div>
                                                 ))}
                                             </div>
                                         </div>
                                     )}
-                                    {activeTab === 'run' && renderRunOutput()}
+                                    {activeTab === 'run' && renderRunResults()}
                                     {activeTab === 'submit' && renderSubmitResult()}
                                 </div>
                             </div>

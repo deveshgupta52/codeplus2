@@ -8,9 +8,9 @@ import api from './api';
  * @param {string} [stdin=''] - Optional standard input.
  * @returns {Promise<object>} - The single execution result.
  */
-export const runCode = (source_code, language_id, questionId, stdin = '') => {
+export const runCode = (source_code, language_id, questionId) => {
     // Calls POST /api/code/run
-    return api.post('/api/code/run', { source_code, language_id, questionId, stdin });
+    return api.post('/api/code/run', { source_code, language_id, questionId });
 };
 
 /**
