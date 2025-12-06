@@ -6,6 +6,7 @@ import { getQuestionById } from '../api/questionApi';
 import { runCode, submitCode } from '../api/codeApi';
 import { useTheme } from '../context/ThemeContext';
 import { FiBarChart2, FiTag, FiPlay, FiLoader, FiTerminal, FiAlertTriangle, FiCheckCircle, FiChevronDown, FiUploadCloud } from 'react-icons/fi';
+import ProblemDiscussion from '../components/ProblemDiscussion';
 
 // Language Definitions
 const LANGUAGES = [
@@ -212,7 +213,6 @@ const QuestionPage = () => {
                             <div className={`flex items-center gap-2 text-sm font-medium ${difficultyColors[question.difficulty]}`}><FiBarChart2 className="h-4 w-4" /><span>{question.difficulty}</span></div>
                             <div className="flex items-center gap-2 text-sm text-muted-foreground"><FiTag className="h-4 w-4" /><span>{question.category.name}</span></div>
                         </div>
-import ProblemDiscussion from '../components/ProblemDiscussion';
 
                         <div className="prose prose-sm dark:prose-invert max-w-none text-foreground prose-p:text-foreground prose-strong:text-foreground prose-li:text-foreground prose-code:text-foreground prose-code:bg-muted prose-code:px-1.5 prose-code:py-1 prose-code:rounded" dangerouslySetInnerHTML={{ __html: question.description }} />
                         {question.image && question.image.url && ( <div className="mt-6"><h3 className="font-semibold mb-2">Example Image:</h3><img src={question.image.url} alt="Question example" className="rounded-lg border border-border max-w-full h-auto" /></div> )}
