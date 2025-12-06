@@ -8,6 +8,22 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, Dialog
 import { Comment } from './Comment';
 import CommentForm from './CommentForm';
 
+const scrollbarStyles = `
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: hsl(var(--muted-foreground));
+    border-radius: 4px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted));
+  }
+`;
+
 const GlobalDiscussionFeed = () => {
     const [discussions, setDiscussions] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -163,7 +179,7 @@ const GlobalDiscussionFeed = () => {
 
             {selectedDiscussion && (
                 <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-                    <DialogContent className="max-w-3xl h-[80vh] flex flex-col">
+                    <DialogContent className="max-w-6xl h-[90vh] flex flex-col">
                         <DialogHeader>
                             <DialogTitle>{selectedDiscussion.title}</DialogTitle>
                             {selectedDiscussion.comments && selectedDiscussion.comments.length > 0 && (
@@ -172,7 +188,7 @@ const GlobalDiscussionFeed = () => {
                                 </DialogDescription>
                             )}
                         </DialogHeader>
-                        <div className="flex-1 overflow-y-auto pr-4">
+                        <div className="flex-1 overflow-y-auto pr-4 custom-scrollbar">
                             {selectedDiscussion.comments.map((comment) => (
                                 <Comment
                                     key={comment._id}
