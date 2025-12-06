@@ -5,13 +5,21 @@ const discussionSchema = new mongoose.Schema({
   question: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Question',
-    required: true,
-    unique: true,
   },
   comments: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Comment',
   }],
+  isGlobal: {
+    type: Boolean,
+    default: false,
+  },
+  title: {
+    type: String,
+    required: function() {
+      return this.isGlobal;
+    }
+  }
 }, {
   timestamps: true,
 });

@@ -1,0 +1,20 @@
+Entering getProblemDiscussion
+problemId: 693432eed854d019cfd4fce5
+discussion after findOne: null
+Discussion not found, creating a new one
+Error in getProblemDiscussion: MongoServerError: E11000 duplicate key error collection: test.discussions index: question_1 dup key: { question: ObjectId('693432eed854d019cfd4fce5') }
+Entering getProblemDiscussion
+problemId: 693432eed854d019cfd4fce5
+discussion after findOne: null
+Discussion not found, creating a new one
+Error in getProblemDiscussion: MongoServerError: E11000 duplicate key error collection: test.discussions index: question_1 dup key: { question: ObjectId('693432eed854d019cfd4fce5') }
+Entering getProblemDiscussion
+problemId: 693432eed854d019cfd4fce5
+discussion after findOne: null
+Discussion not found, creating a new one
+Entering getProblemDiscussion
+problemId: 693432eed854d019cfd4fce5
+Error in getProblemDiscussion: MongoServerError: E11000 duplicate key error collection: test.discussions index: question_1 dup key: { question: ObjectId('693432eed854d019cfd4fce5') }
+discussion after findOne: null
+Discussion not found, creating a new one
+Error in getProblemDiscussion: MongoServerError: E11000 duplicate key error collection: test.discussions index: question_1 dup key: { question: ObjectId('693432eed854d019cfd4fce5') }

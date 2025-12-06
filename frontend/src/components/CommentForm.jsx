@@ -1,7 +1,9 @@
 
 import { useState } from "react";
+import { Textarea } from '@/components/ui/Textarea';
+import { Button } from '@/components/ui/Button';
 
-export default function CommentForm({ onSubmit, initialText = "", isEdit = false, onCancel }) {
+export default function CommentForm({ onSubmit, initialText = "", isEdit = false, onCancel, setText: setParentText }) {
   const [text, setText] = useState(initialText);
 
   const handleSubmit = (e) => {
@@ -12,22 +14,29 @@ export default function CommentForm({ onSubmit, initialText = "", isEdit = false
     }
   };
 
+  const handleChange = (e) => {
+    if (setParentText) {
+      setParentText(e.target.value);
+    }
+    setText(e.target.value);
+  }
+
   return (
-    <form onSubmit={handleSubmit}>
-      <textarea
-        className="w-full p-2 rounded bg-gray-800 border border-gray-700"
-        rows="3"
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-      ></textarea>
-      <div className="flex gap-2 mt-2">
-        <button type="submit" className="bg-purple-600 text-white p-2 rounded">
+    <form onSubmit={handleSubmit} className="w-full">
+      <Textarea
+        placeholder="Add a comment..."
+        value={setParentText ? initialText : text}
+        onChange={handleChange}
+        className="w-full"
+      />
+      <div className="flex justify-end gap-2 mt-2">
+        <Button type="submit">
           {isEdit ? "Save" : "Comment"}
-        </button>
+        </Button>
         {isEdit && (
-          <button type="button" onClick={onCancel} className="bg-gray-500 text-white p-2 rounded">
+          <Button type="button" variant="outline" onClick={onCancel}>
             Cancel
-          </button>
+          </Button>
         )}
       </div>
     </form>
