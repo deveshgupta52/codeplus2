@@ -5,6 +5,7 @@ import Editor from "@monaco-editor/react";
 import { getQuestionById } from '../api/questionApi';
 import { runCode, submitCode } from '../api/codeApi';
 import { useTheme } from '../context/ThemeContext';
+import { useAuth } from '../context/AuthContext';
 import { FiBarChart2, FiTag, FiPlay, FiLoader, FiTerminal, FiAlertTriangle, FiCheckCircle, FiChevronDown, FiUploadCloud } from 'react-icons/fi';
 import ProblemDiscussion from '../components/ProblemDiscussion';
 
@@ -19,6 +20,7 @@ const LANGUAGES = [
 const QuestionPage = () => {
     const { id } = useParams();
     const { themeId } = useTheme();
+    const { user } = useAuth(); // Get user from AuthContext
     const editorRef = useRef(null);
 
     const [question, setQuestion] = useState(null);
@@ -217,7 +219,7 @@ const QuestionPage = () => {
                         <div className="prose prose-sm dark:prose-invert max-w-none text-foreground prose-p:text-foreground prose-strong:text-foreground prose-li:text-foreground prose-code:text-foreground prose-code:bg-muted prose-code:px-1.5 prose-code:py-1 prose-code:rounded" dangerouslySetInnerHTML={{ __html: question.description }} />
                         {question.image && question.image.url && ( <div className="mt-6"><h3 className="font-semibold mb-2">Example Image:</h3><img src={question.image.url} alt="Question example" className="rounded-lg border border-border max-w-full h-auto" /></div> )}
                         <section className="mt-8">
-                          <ProblemDiscussion problemId={id} />
+                          {user && <ProblemDiscussion problemId={id} />}
                         </section>
                     </div>
                 </Panel>
